@@ -15,7 +15,7 @@ function removeError(x, y) {
 
 function calcTip(x) {
   let percentboxes = document.querySelectorAll(`.tip`);
-  for (let i = 0; i < percentboxes.length; i++) {
+  for (let i = 0; i < percentboxes.length - 1; i++) {
     percentboxes[i].classList.remove(`clicked`);
     percentboxes[i].style.backgroundColor = `var(--buttons-cl)`;
   }
