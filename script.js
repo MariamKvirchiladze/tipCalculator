@@ -14,10 +14,17 @@ function removeError(x, y) {
 }
 
 function calcTip(x) {
+  let percentboxes = document.querySelectorAll(`.tip`);
+  for (let i = 0; i < percentboxes.length; i++) {
+    percentboxes[i].classList.remove(`clicked`);
+    percentboxes[i].style.backgroundColor = `var(--buttons-cl)`;
+  }
   bill = Number(document.querySelector(`#bill`).value);
   people = Math.floor(Number(document.querySelector(`#people`).value));
   document.querySelector(`#people`).value = people;
+  error();
   if (bill > 0 && people > 0) {
+    document.querySelector(x).classList.add(`clicked`);
     let tipPercent = Number(document.querySelector(x).value);
     if (tipPercent > 0 && tipPercent <= 100) {
       let tip = (bill * tipPercent) / 100;
@@ -32,9 +39,10 @@ function calcTip(x) {
 function reset() {
   document.querySelector(`#bill`).value = ``;
   document.querySelector(`#people`).value = ``;
-  removeError();
   document.querySelector(`#valuetip`).textContent = `$0.00`;
   document.querySelector(`#valuetotal`).textContent = `$0.00`;
+  removeError("#red-text1", "#bill");
+  removeError("#red-text2", "#people");
 }
 
 function error() {
@@ -49,5 +57,11 @@ function error() {
     addError("#red-text2", "#people");
   } else if (people > 0) {
     removeError("#red-text2", "#people");
+  }
+}
+
+function clicked(x) {
+  if (document.querySelector(x).classList.contains(`clicked`)) {
+    document.querySelector(x).style.backgroundColor = `var(--hover-cl)`;
   }
 }

@@ -133,6 +133,11 @@ h1 {
   text-align: right;
   color: var(--hover-cl);
 }
+.output,
+.inputs,
+.number {
+  overflow: auto;
+}
 #box-4,
 #box-5 {
   display: flex;
