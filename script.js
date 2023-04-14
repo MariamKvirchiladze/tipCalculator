@@ -3,6 +3,10 @@ let bill;
 let people;
 let tipAmount;
 let total;
+let percentboxes = document.querySelectorAll(`.tip`);
+let firstClick = false;
+let clicked;
+let tipPercent;
 
 function addError(x, y) {
   document.querySelector(x).textContent = `Cant be zero...`;
@@ -12,20 +16,26 @@ function removeError(x, y) {
   document.querySelector(x).textContent = ``;
   document.querySelector(y).style.border = `none`;
 }
+for (let i = 0; i < percentboxes.length; i++) {
+  percentboxes[i].addEventListener(`click`, (event) => {
+    if (firstClick) {
+      clicked.classList.remove(`clicked`);
+    }
+    clicked = event.target;
+    tipPercent = Number(event.target.value);
+    calcTip();
+    clicked.classList.add("clicked");
+    firstClick = true;
+  });
+}
 
-function calcTip(x) {
-  let percentboxes = document.querySelectorAll(`.tip`);
-  for (let i = 0; i < percentboxes.length - 1; i++) {
-    percentboxes[i].classList.remove(`clicked`);
-    percentboxes[i].style.backgroundColor = `var(--buttons-cl)`;
-  }
+function calcTip() {
   bill = Number(document.querySelector(`#bill`).value);
   people = Math.floor(Number(document.querySelector(`#people`).value));
   document.querySelector(`#people`).value = people;
   error();
   if (bill > 0 && people > 0) {
-    document.querySelector(x).classList.add(`clicked`);
-    let tipPercent = Number(document.querySelector(x).value);
+    console.log(tipPercent, `2`);
     if (tipPercent > 0 && tipPercent <= 100) {
       let tip = (bill * tipPercent) / 100;
       tipAmount = (tip / people).toFixed(3);
@@ -57,11 +67,5 @@ function error() {
     addError("#red-text2", "#people");
   } else if (people > 0) {
     removeError("#red-text2", "#people");
-  }
-}
-
-function clicked(x) {
-  if (document.querySelector(x).classList.contains(`clicked`)) {
-    document.querySelector(x).style.backgroundColor = `var(--hover-cl)`;
   }
 }

@@ -89,6 +89,9 @@ h4 {
   cursor: pointer;
 }
 .tip:hover {
+  background-color: var(--clicked-cl);
+}
+.clicked {
   background-color: var(--hover-cl);
 }
 .red-border {
@@ -134,8 +137,7 @@ h1 {
   color: var(--hover-cl);
 }
 .output,
-.inputs,
-.number {
+.input {
   overflow: auto;
 }
 #box-4,
