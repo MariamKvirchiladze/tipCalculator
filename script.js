@@ -16,19 +16,18 @@ function removeError(x, y) {
   document.querySelector(x).textContent = ``;
   document.querySelector(y).style.border = `none`;
 }
-for (let i = 0; i < percentboxes.length; i++) {
+for (let i = 0; i < percentboxes.length - 1; i++) {
   percentboxes[i].addEventListener(`click`, (event) => {
-    if (firstClick) {
-      clicked.classList.remove(`clicked`);
-    }
-    clicked = event.target;
     tipPercent = Number(event.target.value);
     calcTip();
-    clicked.classList.add("clicked");
-    firstClick = true;
+    changeBG(event);
   });
 }
 
+document.querySelector(`#tip-input`).addEventListener(`input`, (event) => {
+  tipPercent = Number(event.target.value);
+  calcTip();
+});
 function calcTip() {
   bill = Number(document.querySelector(`#bill`).value);
   people = Math.floor(Number(document.querySelector(`#people`).value));
@@ -68,4 +67,13 @@ function error() {
   } else if (people > 0) {
     removeError("#red-text2", "#people");
   }
+}
+
+function changeBG(event) {
+  if (firstClick) {
+    clicked.classList.remove(`clicked`);
+  }
+  clicked = event.target;
+  clicked.classList.add("clicked");
+  firstClick = true;
 }
