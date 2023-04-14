@@ -18,6 +18,8 @@ function removeError(x, y) {
 }
 for (let i = 0; i < percentboxes.length - 1; i++) {
   percentboxes[i].addEventListener(`click`, (event) => {
+    document.querySelector(`#tip-input`).value = "";
+
     tipPercent = Number(event.target.value);
     calcTip();
     changeBG(event);
@@ -25,6 +27,9 @@ for (let i = 0; i < percentboxes.length - 1; i++) {
 }
 
 document.querySelector(`#tip-input`).addEventListener(`input`, (event) => {
+  if (firstClick) {
+    clicked.classList.remove(`clicked`);
+  }
   tipPercent = Number(event.target.value);
   calcTip();
 });
