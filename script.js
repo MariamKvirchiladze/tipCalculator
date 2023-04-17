@@ -39,7 +39,6 @@ function calcTip() {
   document.querySelector(`#people`).value = people;
   error();
   if (bill > 0 && people > 0) {
-    console.log(tipPercent, `2`);
     if (tipPercent > 0 && tipPercent <= 100) {
       let tip = (bill * tipPercent) / 100;
       tipAmount = (tip / people).toFixed(3);
@@ -53,8 +52,13 @@ function calcTip() {
 function reset() {
   document.querySelector(`#bill`).value = ``;
   document.querySelector(`#people`).value = ``;
+  document.querySelector(`#tip-input`).value = ``;
   document.querySelector(`#valuetip`).textContent = `$0.00`;
   document.querySelector(`#valuetotal`).textContent = `$0.00`;
+  if (firstClick) {
+    clicked.classList.remove(`clicked`);
+  }
+  firstClick = false;
   removeError("#red-text1", "#bill");
   removeError("#red-text2", "#people");
 }
